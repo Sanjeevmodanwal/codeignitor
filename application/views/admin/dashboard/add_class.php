@@ -40,7 +40,7 @@
                             <?php $count=1; foreach ($class as $cal) { ?>
                                 <tr>
                                     <td><?php echo $count++;?></td>
-                                    <td><?php echo $cal['name']; ?></td>
+                                    <td><?php echo $cal['class_name']; ?></td>
                                     <td><?php echo $cal['date']; ?></td>
                                 </tr>
                             <?php } ?>

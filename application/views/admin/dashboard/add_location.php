@@ -42,7 +42,7 @@
                             <?php $count=1;foreach ($location as $local) { ?>
                                 <tr>
                                     <td><?php echo $count++;?></td>
-                                    <td><?php echo $local['name']; ?></td>
+                                    <td><?php echo $local['location_name']; ?></td>
                                     <td><?php echo $local['address']; ?></td>
                                 </tr>
                             <?php } ?>

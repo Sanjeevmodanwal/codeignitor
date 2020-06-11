@@ -81,14 +81,17 @@ class Dashboard extends CI_Controller {
             'location_id'=>  $this->input->post('location'),
             'class_id'=>$this->input->post('class'),
             'duration'=>  $this->input->post('duration'),
-            'day'=>  $this->input->post('day')
+            'day'=>  $this->input->post('day'),
+            'hour'=>$this->input->post('hour'),
+            'min'=>$this->input->post('minut'),
+            'am'=>$this->input->post('am'),
         );
-//        $this->db->insert('schedule', $data);
-//        if ($this->db->affected_rows() > 0) {
-//            $data['status']=1;
-//        } else {
-//            $data['status']=0;
-//        }
+        $this->db->insert('schedule', $data);
+        if ($this->db->affected_rows() > 0) {
+            $data['status']=1;
+        } else {
+            $data['status']=0;
+        }
          $this->session->set_flashdata('item','Add Data Successfully !'); 
         redirect('/admin/dashboard/schedule');
     }
