@@ -13,12 +13,23 @@ class Dashboard_model extends CI_Model {
         $query = $this->db->get('location');
         return $query->result_array();
     }
-    
-     public function get_classes() {
+
+    public function get_classes() {
         $this->db->order_by('id', 'DESC');
         $query = $this->db->get('class');
         return $query->result_array();
     }
 
+    public function get_schedule_data() {
+        $this->db->select('*');
+       
+        $this->db->from('location');
+       //$this->db->order_by('id', 'DESC');
+        $this->db->join('schedule', 'schedule.location_id = location.id');
+        $this->db->join('class', 'class.id = schedule.class_id');
+        $this->db->order_by('schedule.id', 'DESC');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 
 }

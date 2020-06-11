@@ -19,11 +19,14 @@
 <script src="<?= base_url('assets/lib/datatables/dataTables.buttons.min.js'); ?>"></script>
 
 
+
+<script src="<?= base_url('assets/lib/toast/jquery.toast.min.js'); ?>"></script>
+
 <!--        <script src="assets/lib/datatables/jszip.min.js"></script>
 <script src="assets/lib/datatables/pdfmake.min.js"></script>-->
 <!--<script src="assets/lib/datatables/vfs_fonts.js"></script>
 <script src="assets/lib/datatables/buttons.html5.min.js"></script>
-<script src="assets/lib/toast/jquery.toast.min.js"></script>-->
+
 <script>
     $(document).ready(function () {
         $('#datatable').dataTable();

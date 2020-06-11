@@ -1,44 +1,49 @@
 <section class="main-content container">
+    
+    <div class="text-left margin-b-2"><strong><?php echo $this->session->flashdata('item'); ?> </strong></div>
+ 
     <div class="row">
+
         <div class="col-sm-6">
             <div class="card">
                 <div class="card-heading card-default">Schedule</div>
                 <div class="card-block">
-                    <form role="form">
+                    <form role="form" method="post" action="<?php echo base_url('/admin/dashboard/add_schedule'); ?>">
                         <div class="form-group">
                             <label>Select Location</label>
-                            <select name="account" class="form-control m-b">
-                                <?php foreach($Location as $local) { ?>
-                                <option value="<?php echo $local['id'];?>"><?php echo $local['name'];?></option>
+                            <select name="location" class="form-control m-b location">
+                                <?php foreach ($Location as $local) { ?>
+                                    <option value="<?php echo $local['id']; ?>"><?php echo $local['location_name']; ?></option>
                                 <?php } ?>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label>Select Class</label>
-                            <select name="account" class="form-control m-b">
-                               <?php foreach($class as $cls) { ?>
-                                <option value="<?php echo $cls['id'];?>"><?php echo $cls['name'];?></option>
+                            <select name="class" class="form-control m-b">
+                                <?php foreach ($class as $cls) { ?>
+                                    <option value="<?php echo $cls['id']; ?>"><?php echo $cls['class_name']; ?></option>
                                 <?php } ?>>
-                              
                             </select>
                         </div>
 
                         <div class="form-group ">
                             <label>Duration</label>
-                            <input type="text" placeholder="Duration" class="form-control" id="name">
+                            <input type="text" placeholder="Duration" class="form-control" name="duration">
                         </div>
                         <div class="form-group">
-                            <label>Select</label>
-                            <select name="account" class="form-control m-b">
-                                <option>Option 1</option>
-                                <option>Option 2</option>
-                                <option>Option 3</option>
-                                <option>Option 4</option>
+                            <label>Select Day</label>
+                            <select name="day" class="form-control m-b">
+                                <option value="Monday">Monday</option>
+                                <option value="Tuesday">Thusday</option>
+                                <option value="Wednessday">WednessDay</option>
+                                <option value="Friday">Friday</option>
+                                <option value="Saterday">Satarday</option>
+                                <option value="Sunday">Sunday</option>
                             </select>
                         </div>
 
-                        <button type="button" class="btn btn-sm btn-primary AddLocation">Add Location</button>
+                        <button type="submit" class="btn btn-sm btn-primary">Add Location</button>
                     </form>
                 </div>
             </div>
@@ -56,23 +61,32 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Name</th>
-                                <th>Address</th>
+                                <th>Location</th>
+                                <th>Class</th>
+                                <th>Duration</th>
+                                <th>Day</th>
 
                             </tr>
                         </thead>
 
                         <tbody>
-                            <tr>
-                               
-                            </tr>
-
+                            <?php $count = 1;
+                            foreach ($schedules as $sec) { ?>
+                                <tr>
+                                    <td><?php echo $count++; ?></td>
+                                    <td><?php echo $sec['location_name']; ?></td>
+                                    <td><?php echo $sec['class_name']; ?></td>
+                                    <td><?php echo $sec['duration']; ?></td>
+                                    <td><?php echo $sec['day']; ?></td>
+                                </tr>
+<?php } ?>
 
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+    </div>
 </section>
 
 <script>

@@ -34,16 +34,16 @@
             <div class="misc-content">
                 <div class="container">
                     <div class="row justify-content-center">
-                        <div class="col-4">
+                        <div class="col-md-4">
                             <div class="misc-header text-center">
-                                <img src="assets/img/logo-dark.png" alt="">
+<!--                                <img src="assets/img/logo-dark.png" alt="">-->
                             </div>
                             <div class="misc-box">   
-                                <form role="form">
+<!--                                <form role="form">-->
                                     <div class="form-group">                                      
-                                        <label  for="exampleuser1">Username</label>
+                                        <label  for="exampleuser1">Email</label>
                                         <div class="group-icon">
-                                        <input id="exampleuser1" type="text" placeholder="Username" class="form-control" required="">
+                                        <input id="exampleemail" type="email" placeholder="Email" class="form-control" required="">
                                         <span class="icon-user text-muted icon-input"></span>
                                         </div>
                                     </div>
@@ -62,16 +62,16 @@
 											</div>
                                         </div>
                                         <div class="pull-right">
-                                            <button type="submit" class="btn btn-block btn-primary">Login</button>
+                                            <button type="button" class="btn btn-block btn-primary Login">Login</button>
                                         </div>
                                     </div>
-                                    <hr>
-                                    <p class="text-center">Need to Signup?</p>
-                                    <a href="page-register.html" class="btn btn-block btn-success">Register Now</a>
-                                </form>
+<!--                                    <hr>-->
+<!--                                    <p class="text-center">Need to Signup?</p>
+                                    <a href="page-register.html" class="btn btn-block btn-success">Register Now</a>-->
+<!--                                </form>-->
                             </div>
                             <div class="text-center misc-footer">
-                               <p>Copyright &copy; 2017 Fixed Admin</p>
+<!--                               <p>Copyright &copy; 2017 Fixed Admin</p>-->
                             </div>
                         </div>
                     </div>
@@ -81,13 +81,21 @@
 
         <!-- Common Plugins -->
         <script src="assets/lib/jquery/dist/jquery.min.js"></script>
-        <script src="assets/lib/bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/lib/pace/pace.min.js"></script>
-        <script src="assets/lib/jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
-        <script src="assets/lib/slimscroll/jquery.slimscroll.min.js"></script>
-        <script src="assets/lib/nano-scroll/jquery.nanoscroller.min.js"></script>
-        <script src="assets/lib/metisMenu/metisMenu.min.js"></script>
-        <script src="assets/js/custom.js"></script>
+      
+        
+        <script>
+            $('.Login').on("click",function(){
+               var email=$('#exampleemail').val();
+               var pass=$('#exampleInputPassword1').val();
+               $.post("<?php echo base_url('Auth/login');?>",{"email":email,"password":pass},function(d){
+                  if(d.status==200){
+                      window.location.href="<?php echo base_url('/admin/dashboard/');?>";
+                  }else if(d.status==500){
+                      alert("me");
+                  }
+               }, "json");
+            });
+        </script>
 		
     </body>
 </html>

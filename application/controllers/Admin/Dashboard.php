@@ -7,7 +7,10 @@ class Dashboard extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->helper(array('form', 'url'));
-         $this->load->model('Dashboard_model');
+        $this->load->model('Dashboard_model');
+        if(isset($_SESSION['user'])){}else{
+            redirect('/', 'refresh');
+        }
     }
 
     public function index() {
@@ -57,7 +60,7 @@ class Dashboard extends CI_Controller {
         );
         $this->db->insert('class', $data);
         if ($this->db->affected_rows() > 0) {
-            $res = array('status' => 200, 'msg' => 'Add record successfully!');
+            $res = array('status' => 200, 'msg' => 'Add record successfully!','date'=>date('Y-m-d'));
         } else {
             $res = array('status' => 500, 'msg' => 'record not saved !');
         }
@@ -66,11 +69,28 @@ class Dashboard extends CI_Controller {
     
     public function schedule(){
        $data['Location']=  $this->Dashboard_model->get_location();
-      // print_r($lcation); exit;
        $data['class']=    $this->Dashboard_model->get_classes();
+       $data['schedules']=$this->Dashboard_model->get_schedule_data();
        $this->load->view('templates/header.php');
        $this->load->view('admin/dashboard/schedule.php',$data);
        $this->load->view('templates/footer.php');  
+    }
+    
+    public function add_schedule(){
+        $data=array(
+            'location_id'=>  $this->input->post('location'),
+            'class_id'=>$this->input->post('class'),
+            'duration'=>  $this->input->post('duration'),
+            'day'=>  $this->input->post('day')
+        );
+//        $this->db->insert('schedule', $data);
+//        if ($this->db->affected_rows() > 0) {
+//            $data['status']=1;
+//        } else {
+//            $data['status']=0;
+//        }
+         $this->session->set_flashdata('item','Add Data Successfully !'); 
+        redirect('/admin/dashboard/schedule');
     }
 
 }

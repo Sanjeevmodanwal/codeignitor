@@ -14,7 +14,7 @@
                                                     <input type="text" placeholder="Address" class="form-control" id="address">
                                                 </div>-->
 
-                        <button type="button" class="btn btn-sm btn-primary AddLocation">Add Location</button>
+                        <button type="button" class="btn btn-sm btn-primary AddLocation">Add Class</button>
                     </form>
                 </div>
             </div>
@@ -33,26 +33,21 @@
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
-                                <th>Address</th>
-
+                                <th>Date</th>
                             </tr>
                         </thead>
-
-                        <tbody>
-                            <tr>
-                                <?php foreach ($class as $cal) { ?>
-                                    <td>1</td>
+                        <tbody id="ClassList">
+                            <?php $count=1; foreach ($class as $cal) { ?>
+                                <tr>
+                                    <td><?php echo $count++;?></td>
                                     <td><?php echo $cal['name']; ?></td>
                                     <td><?php echo $cal['date']; ?></td>
-                                <?php } ?>
-                            </tr>
-
-
+                                </tr>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>
             </div>
-
         </div>
 </section>
 
@@ -60,7 +55,20 @@
     $('.AddLocation').on("click", function () {
         var name = $('#name').val();
         $.post("<?php echo base_url('admin/dashboard/add_class'); ?>", {"name": name}, function (d) {
-            console.log(d);
-        });
+            if (d.status == 200) {
+                $.toast({
+                    heading: 'Success !',
+                    text: 'Class Add Successfully !',
+                    position: 'top-right',
+                    loaderBg: '#fff',
+                    icon: 'success',
+                    hideAfter: 3000,
+                    stack: 1
+                });
+                $('<tr><td>#</td><td>' + name + '</td><td>' + d.date + '</td><tr>').appendTo('#ClassList');
+            } else {
+
+            }
+        }, 'json');
     });
 </script>

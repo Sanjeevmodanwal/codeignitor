@@ -38,15 +38,14 @@
                             </tr>
                         </thead>
 
-                        <tbody>
-                            <tr>
-                                <?php foreach ($location as $local) { ?>
-                                    <td>1</td>
+                        <tbody id="ListLocation">
+                            <?php $count=1;foreach ($location as $local) { ?>
+                                <tr>
+                                    <td><?php echo $count++;?></td>
                                     <td><?php echo $local['name']; ?></td>
                                     <td><?php echo $local['address']; ?></td>
-                                <?php } ?>
-                            </tr>
-
+                                </tr>
+                            <?php } ?>
 
                         </tbody>
                     </table>
@@ -60,7 +59,18 @@
         var name = $('#name').val();
         var add = $('#address').val();
         $.post("<?php echo base_url('admin/dashboard/add_location'); ?>", {"name": name, "address": add}, function (d) {
-            console.log(d);
-        });
+            if (d.status == 200) {
+                $.toast({
+                    heading: 'Success !',
+                    text: 'Location Add Successfully !',
+                    position: 'top-right',
+                    loaderBg: '#fff',
+                    icon: 'success',
+                    hideAfter: 3000,
+                    stack: 1
+                });
+                $('<tr><td>#</td><td>' + name + '</td><td>' + add + '</td><tr>').appendTo('#ListLocation');
+            }
+        }, 'json');
     });
 </script>

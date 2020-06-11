@@ -17,6 +17,8 @@
         <link href="assets/lib/datatables/buttons.dataTables.css" rel="stylesheet" type="text/css">
         <link href="assets/lib/toast/jquery.toast.min.css" rel="stylesheet">-->
         <!-- Custom Css-->
+        
+        <link href="<?=base_url('assets/lib/toast/jquery.toast.min.css');?>" rel="stylesheet">
 
         <link href="<?=base_url('assets/css/style.css');?>" rel="stylesheet">
         <script src="<?= base_url('assets/lib/jquery/dist/jquery.min.js'); ?>"></script>
